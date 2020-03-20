@@ -70,6 +70,33 @@ module.exports = function(app, swig) {
         res.send(respuesta);
     });
 
+    app.get('/autores/filtrar/:rol', function (req, res) {
+        let rol = req.params.rol;
+
+        let autores = [{
+            "nombre": "Mark Knopfler",
+            "grupo": "Dire Straits",
+            "rol": "guitarrista"
+        }, {
+            "nombre": "John Lennon",
+            "grupo": "The Beatles",
+            "rol": "bajista"
+        }, {
+            "nombre": "Ryan Tedder",
+            "grupo": "OneRepublic",
+            "rol": "cantante"
+        }];
+
+        let newAutores = autores.filter(auth => auth.rol === rol);
+
+        let respuesta = swig.renderFile('views/autores.html', {
+            vendedor: 'Tienda de canciones',
+            autores: newAutores
+        });
+
+        res.send(respuesta);
+    });
+
     app.get('/autores/*', function (req, res) {
         res.redirect("/autores");
     });
