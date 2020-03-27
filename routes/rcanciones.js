@@ -50,7 +50,6 @@ module.exports = function(app, swig, gestorBD) {
         };
 
         // Conectarse
-        // Conectarse
         gestorBD.insertarCancion(cancion, function(id){
             if (id == null) {
                 res.send("Error al insertar canción");
@@ -104,11 +103,22 @@ module.exports = function(app, swig, gestorBD) {
             if ( canciones == null ){
                 res.send(respuesta);
             } else {
-                let respuesta = swig.renderFile('views/bcancion.html',
-                    {
-                        cancion : canciones[0]
-                    });
-                res.send(respuesta);
+                let criterioComentario = { "cancion_id": gestorBD.mongo.ObjectID(req.params.id) };
+
+                gestorBD.obtenerComentarios(criterioComentario, function(comentarios){
+                    if ( comentarios == null ){
+                        res.send(respuesta);
+                    }
+                    else {
+                        let respuesta = swig.renderFile('views/bcancion.html',
+                            {
+                                cancion: canciones[0],
+                                comentarios: comentarios
+                            });
+                        res.send(respuesta);
+                    }
+                });
+
             }
         });
     });
