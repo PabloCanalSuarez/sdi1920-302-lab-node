@@ -216,7 +216,7 @@ module.exports = function(app, swig, gestorBD) {
                     }
                 });
             } else {
-                res.redirect("/cancion/" + req.params.id.toString() + "?mensaje=La canción no se pudo comprar");
+                res.redirect("/error" + "?mensaje=La canción no se pudo comprar");
             }
         });
     });
