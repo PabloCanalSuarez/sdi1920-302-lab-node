@@ -9,6 +9,7 @@
             <th><a onclick="ordenarPorNombre()">Nombre</a></th>
             <th>Genero</th>
             <th><a onclick="ordenarPorPrecio()">Precio</a></th>
+            <th><a onclick="ordenarPorGenero()">Genero</a></th>
             <th class="col-md-1"></th>
         </tr>
         </thead>
@@ -103,13 +104,42 @@
         precioDsc = !precioDsc; //invertir
     }
 
+    var nameDsc = true;
     function ordenarPorNombre(){
-        canciones.sort(function(a, b) {
-            if(a.nombre > b.nombre ) return 1;
-            if(a.nombre < b.nombre ) return -1;
-            return 0;
-        });
+        if (nombreDsc) {
+            canciones.sort(function(a,b) {
+                if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) return 1;
+                if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return -1;
+                return 0;
+            });
+        } else {
+            canciones.sort(function(a,b) {
+                if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) return 1;
+                if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) return -1;
+                return 0;
+            });
+        }
         actualizarTabla(canciones);
+        nameDsc = !nameDsc;
+    }
+
+    var generoDsc = true;
+    function ordenarPorGenero() {
+        if (generoDsc) {
+            canciones.sort(function(a,b) {
+                if (a.genero.toLowerCase() > b.genero.toLowerCase()) return 1;
+                if (a.genero.toLowerCase() < b.genero.toLowerCase()) return -1;
+                return 0;
+            });
+        } else {
+            canciones.sort(function(a,b) {
+                if (a.genero.toLowerCase() < b.genero.toLowerCase()) return 1;
+                if (a.genero.toLowerCase() > b.genero.toLowerCase()) return -1;
+                return 0;
+            });
+        }
+        actualizarTabla(canciones);
+        generoDsc = !generoDsc;
     }
 
     $('#filtro-nombre').on('input',function(e){
