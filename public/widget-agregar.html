@@ -43,7 +43,8 @@
 
             },
             error : function (error){
-                $( "#contenedor-principal" ).load("widget-login.html");
+                $('#div-alert-danger').show();
+                $('#div-alert-danger').text('Error: ' + error.responseJSON.error);
             }
         });
     }
