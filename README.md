@@ -1,2 +1,3 @@
 # sdi302-lab-node
-Node Practice - SDI
+
+Repository for 2019-2020 SDI course assignment.
